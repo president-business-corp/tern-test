@@ -101,7 +101,7 @@ jobs:
       - run: |
           for t in ${TAGS//,/ }
           do
-            docker push t
+            docker push "$t"
           done
         env:
           TAGS: ${{ steps.prep.outputs.tags }}

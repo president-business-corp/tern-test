@@ -98,7 +98,13 @@ jobs:
           format: yaml
           output: alpine.yaml
 
-      - run: docker push ${{ steps.prep.outputs.tags }}
+      - run: |
+          for t in ${TAGS//,/ }
+          do
+            docker push t
+          done
+        env:
+          TAGS: ${{ steps.prep.outputs.tags }}
 
       - uses: actions/upload-artifact@v2
         with:
